@@ -1,1 +1,1 @@
-# apjbootcamp2022
+# Bootcamp materials for QBE Actl Analytics
