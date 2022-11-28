@@ -26,11 +26,11 @@ import requests
 authkey = 'BXD67GMINQA6W5JB' #This is the authetication key for our API - we are using AlphaVantage to track stock prices
 ticker = 'MSFT' #Which company do we want to look for?
 function = 'TIME_SERIES_INTRADAY_EXTENDED' # see docs
-interval = '15min' # see docs
+interval = '1min' # see docs
 
 # COMMAND ----------
 
-url = f'https://www.alphavantage.co/query?function={function}&symbol={ticker}&interval={interval}&apikey={authkey}.csv'
+url = f'https://www.alphavantage.co/query?function={function}&symbol={ticker}&interval={interval}&apikey={authkey}'
 
 with requests.Session() as s:
     download = s.get(url)
@@ -46,13 +46,13 @@ df.display()
 
 # COMMAND ----------
 
-df.write.save(f"{base_table_path}/data1")
+df.write.mode("overwrite").save(f"{base_table_path}/data1")
 
 # COMMAND ----------
 
 # MAGIC %sql
 # MAGIC 
-# MAGIC SELECT *
+# MAGIC SELECT count(*)
 # MAGIC FROM delta.`dbfs:/FileStore/QBE/data1`
 
 # COMMAND ----------
